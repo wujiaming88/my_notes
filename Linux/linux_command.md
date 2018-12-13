@@ -1,4 +1,5 @@
 # Linux 命令
+[Linux 命令大全](http://man.linuxde.net/)
 
 ## 常用
 
@@ -23,3 +24,5 @@
 ### sed
 ### awk
 ### grep
+
+
