@@ -20,6 +20,11 @@
 | which/whereis | 查找命令所在路径 |
 
 ## 高级
+- [tcpdump](#tcpdump)
+- [sed](#sed)
+- [awk](#awk)
+
+
 ### tcpdump
 > tcpdump命令是一款sniffer工具，它可以打印所有经过网络接口的数据包的头信息，也可以使用`-w`选项将数据包保存到文件中，方便以后分析
 
@@ -330,6 +335,11 @@ sed脚本是一个sed的命令清单，启动Sed时以-f选项引导脚本文件
 	TCP各种状态列表：
 	netstat -nt | grep -e 127.0.0.1 -e 0.0.0.0 -e ::: -v | awk '/^tcp/ {++state[$NF]} END {for(i in state) print i,"\t",state[i]}'
 	
-### SS
+### ss
+
+### ps
+
+### top
+
 
 	 
