@@ -23,6 +23,11 @@
 - [tcpdump](#tcpdump)
 - [sed](#sed)
 - [awk](#awk)
+- [grep](#grep)
+- [netstat](#netstat)
+- [ss](#ss)
+- [ps](#ps)
+- [top](#top)
 
 
 ### tcpdump
@@ -336,6 +341,36 @@ sed脚本是一个sed的命令清单，启动Sed时以-f选项引导脚本文件
 	netstat -nt | grep -e 127.0.0.1 -e 0.0.0.0 -e ::: -v | awk '/^tcp/ {++state[$NF]} END {for(i in state) print i,"\t",state[i]}'
 	
 ### ss
+> ss命令用来显示处于活动状态的套接字信息。ss命令可以用来获取socket统计信息，它可以显示和netstat类似的内容。但ss的优势在于它能够显示更多更详细的有关TCP和连接状态的信息，而且比netstat更快速更高效
+> > ss快的秘诀在于，它利用到了TCP协议栈中tcp_diag(tcp_diag是一个用于分析统计的模块)
+
+#### 选项
+
+	-h：显示帮助信息；
+	-V：显示指令版本信息；
+	-n：不解析服务名称，以数字方式显示；
+	-a：显示所有的套接字；
+	-l：显示处于监听状态的套接字；
+	-o：显示计时器信息；
+	-m：显示套接字的内存使用情况；
+	-p：显示使用套接字的进程信息；
+	-i：显示内部的TCP信息；
+	-4：只显示ipv4的套接字；
+	-6：只显示ipv6的套接字；
+	-t：只显示tcp套接字；
+	-u：只显示udp套接字；
+	-d：只显示DCCP套接字；
+	-w：仅显示RAW套接字；
+	-x：仅显示UNIX域套接字。
+	
+#### 实例
+
+	ss -t -a 	#显示 TCP 连接
+	ss -s 		#显示 Sockets 摘要(列出当前的established, closed, orphaned and waiting TCP sockets)
+	ss -pl		#查看进程使用的 socket
+	ss -pl | grep 3306 	#找出打开套接字/端口应用程序
+	ss -u -a 	#显示所有 UDP Sockets
+	
 
 ### ps
 
