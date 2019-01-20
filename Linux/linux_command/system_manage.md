@@ -1,4 +1,4 @@
-# Linux 命令
+# Linux 命令-系统管理
 [Linux 命令大全](http://man.linuxde.net/)
 
 ## 常用
@@ -29,6 +29,7 @@
 - [ps](#ps)
 - [top](#top)
 - [xargs](#xargs)
+- [killall](#killall)
 
 
 ### tcpdump
@@ -583,6 +584,105 @@ sed脚本是一个sed的命令清单，启动Sed时以-f选项引导脚本文件
 	
 	
 ### xargs
+> xargs命令是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具
+
+> 它擅长将标准输入数据转换成命令行参数，xargs能够处理管道或者stdin并将其转换成特定命令的命令参数
+ 
+> xargs也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行
+
+> xargs的默认命令是echo，空格是默认定界符
+
+#### 用法
+##### xargs用作替换工具，读取输入数据重新格式化后输出
+
+定义一个测试文件，内有多行文本数据：
+
+	cat test.txt
+	
+	a b c d e f g
+	h i j k l m n
+	o p q
+	r s t
+	u v w x y z
+
+多行输入单行输出：
+
+	cat test.txt | xargs
+	
+	a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+##### -n选项多行输出
+
+	cat test.txt | xargs -n3
+	
+	a b c
+	d e f
+	g h i
+	j k l
+	m n o
+	p q r
+	s t u
+	v w x
+	y z
+	
+##### -d选项可以自定义一个定界符
+
+	echo "nameXnameXnameXname" | xargs -dX
+	
+	name name name name
+	
+结合-n选项使用：
+
+	echo "nameXnameXnameXname" | xargs -dX -n2
+	
+	name name
+	name name
+
+##### -I 选项
+使用-I指定一个替换字符串{}，这个字符串在xargs扩展时会被替换掉，当-I与xargs结合使用，每一个参数命令都会被执行一次
+
+	cat arg.txt | xargs -I {} ./sk.sh -p {} -l
+	
+	-p aaa -l
+	-p bbb -l
+	-p ccc -l
+	
+复制所有图片文件到 /data/images 目录下：
+
+	ls *.jpg | xargs -n1 -I cp {} /data/images
+	
+
+##### xargs结合find使用
+
+用rm 删除太多的文件时候，可能得到一个错误信息：/bin/rm Argument list too long. 用xargs去避免这个问题：
+
+	find . -type f -name "*.log" -print0 | xargs -0 rm -f
+xargs -0将\0作为定界符。
+
+统计一个源代码目录中所有php文件的行数：
+
+	find . -type f -name "*.php" -print0 | xargs -0 wc -l
+查找所有的jpg 文件，并且压缩它们：
+
+	find . -type f -name "*.jpg" -print | xargs tar -czvf images.tar.gz
+
+
+### killall
+> killall命令使用进程的名称来杀死进程，使用此指令可以杀死一组同名进程
+
+#### 选项
+
+	-e：对长名称进行精确匹配；
+	-l：忽略大小写的不同；
+	-p：杀死进程所属的进程组；
+	-i：交互式杀死进程，杀死进程前需要进行确认；
+	-l：打印所有已知信号列表；
+	-q：如果没有进程被杀死。则不输出任何信息；
+	-r：使用正规表达式匹配要杀死的进程名称；
+	-s：用指定的进程号代替默认信号“SIGTERM”；
+	-u：杀死指定用户的进程。
+
+
 
 
 
