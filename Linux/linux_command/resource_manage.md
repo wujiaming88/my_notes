@@ -6,6 +6,12 @@
 - [du](#du)
 - [badblock](#badblock)
 
+## 性能监测与优化
+- [free](#free)
+- [uptime](#uptime)
+- [lsb_release](#lsb_release)
+- [uname](#uname)
+
 ### df
 > df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB
 
@@ -75,14 +81,6 @@
 * 磁盘装置：指定要检查的磁盘装置；
 * 磁盘区块数：指定磁盘装置的区块总数；
 * 启始区块：指定要从哪个区块开始检查。
-
-#### 实例
-
-## 性能监测与优化
-- [free](#free)
-- [uptime](#uptime)
-- [lsb_release](#lsb_release)
-- [uname](#uname)
 
 ### free
 > free命令可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区
