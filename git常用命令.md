@@ -35,6 +35,10 @@
 2. 查看远程所有分支 `git branch -r`
 3. 建立本地分支 `git checkout –b 本地分支名 远程分支名`
 
+## 使用远程仓库强制覆盖本地
+
+	git reset --hard origin/master 
+
 ## 查看某文件的修改历史
 ### git log
 
